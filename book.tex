@@ -1,0 +1,72 @@
+\documentclass[a5j,twocolumn,twoside]{tbook}
+\AtBeginDvi{\special{papersize=148mm,210mm}}
+\setlength{\pdfpagewidth}{148mm}
+\setlength{\pdfpageheight}{210mm}
+% packages
+\usepackage{titling}
+
+% documentinfomation
+\input{info.txt}
+
+% pagestyle
+\pagestyle{headings}
+\let\tmp\oddsidemargin
+\let\oddsidemargin\evensidemargin
+\let\evensidemargin\tmp
+\reversemarginpar
+\topmargin-1.8cm\advance\textwidth1.3cm
+\parindent = 0pt
+
+% (re)newcommands
+\newcommand{\Chap}[1]{
+    \clearpage
+    \section*{#1}\addcontentsline{toc}{section}{#1}
+}
+\newcommand{\Sepa}[0]{
+    \begin{center}＊\end{center}
+}
+\makeatletter
+\renewcommand{\@dotsep}{10000}
+\renewcommand\maketitle{
+    \onecolumn
+    \thispagestyle{empty}
+    \vspace*{\stretch{1}}
+    \hspace*{-1.8cm}
+    \makebox[\pdfpageheight][c]{
+    \hspace*{\stretch{1}}
+    \vrule
+    \parbox<y>[r][0.1\textwidth][c]{0.5\textheight}{\centering \Huge \@title }
+    \parbox<y>[r][0.1\textwidth][c]{0.5\textheight}{\centering \large \@author }
+    \vrule
+    \hspace*{\stretch{1}}
+    }
+    \vspace*{\stretch{1}}
+}
+\newcommand{\Colophon}[0]{
+    \onecolumn
+    \pagebreak
+    \thispagestyle{empty}
+    \vspace*{\stretch{1}}
+    \hspace*{\stretch{1}}
+    \vrule
+    \parbox<y>[c]{0.5\textwidth}{◆書名　 ...... \@title}
+    \parbox<y>[c]{0.5\textwidth}{◆発行者 ...... \@author}
+    \parbox<y>[c]{0.5\textwidth}{◆発行　 ...... \group}
+    \parbox<y>[c]{0.5\textwidth}{◆発行日 ...... \@date}
+    \parbox<y>[c]{0.5\textwidth}{◆印刷者 ...... \publisher}
+    \parbox<y>[c]{0.5\textwidth}{◆連絡先 ...... \contact}
+    \vspace*{\stretch{1}}
+    \vrule
+}
+\makeatother
+
+% body
+\begin{document}
+\maketitle
+\tableofcontents
+
+\twocolumn
+\input{index.txt}
+
+\Colophon
+\end{document}

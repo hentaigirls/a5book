@@ -178,3 +178,10 @@ TSWLatexianTemp*
 
 # KBibTeX
 *~[0-9]*
+
+index.txt
+info.txt
+build/
+text/
+!sample/index.txt
+!sample/info.txt
