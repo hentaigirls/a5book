@@ -1,1 +1,0 @@
-\input{text/lorem.txt}

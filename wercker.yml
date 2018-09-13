@@ -1,0 +1,9 @@
+box: amane/lualatex-latexmk:latest
+
+build:
+  steps:
+    - script:
+        name: compile document
+        code: |
+          latexmk
+          cp build/book.pdf ${WERCKER_REPORT_ARTIFACTS_DIR}/

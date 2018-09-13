@@ -1,7 +1,0 @@
-\title{TITLE}
-\author{YOURNAME}
-\newcommand{\contact}{CONTACT}
-\newcommand{\group}{CIRCLENAME}
-\newcommand{\publisher}{PUBLISHER}
-\date{DATE}
-\renewcommand{\contentsname}{CONTENTSNASME}

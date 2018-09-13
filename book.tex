@@ -1,26 +1,51 @@
-\documentclass[a5j,twocolumn,twoside]{tbook}
-\AtBeginDvi{\special{papersize=148mm,210mm}}
-\setlength{\pdfpagewidth}{148mm}
-\setlength{\pdfpageheight}{210mm}
+\documentclass[twocolumn,twoside,a5j]{ltjtbook}
 % packages
-\usepackage{titling}
+\usepackage{luatexja}
+\usepackage[sourcehan]{luatexja-preset}
+\usepackage{bxjaprnind}
+\usepackage{changepage}
+\usepackage{luatexja-otf}
+\usepackage{graphicx}
 
 % documentinfomation
 \input{info.txt}
+\title{\booktitle}
+\author{\bookauthor}
+\date{\publishdate}
 
-% pagestyle
-\pagestyle{headings}
+% config
+\parheadparenindentamount{-0.5}
+\topmargin-1.8cm\advance\textwidth1.3cm
 \let\tmp\oddsidemargin
 \let\oddsidemargin\evensidemargin
 \let\evensidemargin\tmp
 \reversemarginpar
-\topmargin-1.8cm\advance\textwidth1.3cm
-\parindent = 0pt
 
 % (re)newcommands
-\newcommand{\Chap}[1]{
+\def\――{\rule[0pt]{2\zw}{.25pt}}
+\newcommand{\Title}[2]{
     \clearpage
-    \section*{#1}\addcontentsline{toc}{section}{#1}
+    \checkoddpage
+    \ifoddpage\else
+    \thispagestyle{empty}
+    \hspace*{\stretch{1}}
+    \clearpage
+    \fi
+    \onecolumn
+    \thispagestyle{empty}
+    \vspace*{\stretch{1}}
+    \hspace*{-1.8cm}
+    \hspace*{\stretch{1}}
+    \hspace*{1em}
+    \parbox<y>[c]{0.55\textwidth}{\centering \Huge #1}
+    \hspace*{1em}
+    \parbox<y>[c]{0.5\textwidth}{\centering \large #2}
+    \hspace*{1em}
+    \hspace*{\stretch{1}}
+    \vspace*{\stretch{1}}
+    \addcontentsline{toc}{section}{#1\hspace*{0.5em}\――\hspace*{0.5em}#2}
+    \twocolumn
+    \clearpage
 }
 \newcommand{\Sepa}[0]{
     \begin{center}＊\end{center}
@@ -32,29 +57,46 @@
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
     \hspace*{-1.8cm}
-    \makebox[\pdfpageheight][c]{
     \hspace*{\stretch{1}}
     \vrule
-    \parbox<y>[r][0.1\textwidth][c]{0.5\textheight}{\centering \Huge \@title }
-    \parbox<y>[r][0.1\textwidth][c]{0.5\textheight}{\centering \large \@author }
+    \hspace*{1em}
+    \parbox<y>[c]{0.5\textwidth}{\centering \Huge \@title }
+    \hspace*{1em}
+    \parbox<y>[c]{0.5\textwidth}{\centering \large \@author }
+    \hspace*{1em}
     \vrule
     \hspace*{\stretch{1}}
-    }
     \vspace*{\stretch{1}}
 }
 \newcommand{\Colophon}[0]{
     \onecolumn
-    \pagebreak
+    \clearpage
+    \checkoddpage
+    \ifoddpage\else
+    \thispagestyle{empty}
+    \hspace*{\stretch{1}}
+    \clearpage
+    \fi
+    \thispagestyle{empty}
+    \vspace*{\stretch{1}}
+    \hspace*{\stretch{1}}
+    \parbox<y>[c]{0.5\textwidth}{\small{法律で認められている範囲を超えた無断複製・無断転載を禁じます。}}
+    % \hspace*{0.5em}
+    % \parbox<y>[c]{0.5\textwidth}{\small{ただし、「_____」の全文はCC BY 4.0でライセンスされており、ライセンスの条件に従っている限り自由に利用できます。CC BY 4.0の詳細は以下のURLで確認できます。\\\texttt{https://creativecommons.org/licenses/by/4.0/}}}
+    \vspace*{\stretch{1}}
+    \clearpage
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
     \hspace*{\stretch{1}}
     \vrule
-    \parbox<y>[c]{0.5\textwidth}{◆書名　 ...... \@title}
-    \parbox<y>[c]{0.5\textwidth}{◆発行者 ...... \@author}
-    \parbox<y>[c]{0.5\textwidth}{◆発行　 ...... \group}
-    \parbox<y>[c]{0.5\textwidth}{◆発行日 ...... \@date}
-    \parbox<y>[c]{0.5\textwidth}{◆印刷者 ...... \publisher}
-    \parbox<y>[c]{0.5\textwidth}{◆連絡先 ...... \contact}
+    \vspace*{\stretch{1}}
+    \hspace*{0.25em}
+    \parbox<y>[c]{0.5\textwidth}{\hspace{0.5em}書名\hspace{0.5em} ...... \@title}
+    \parbox<y>[c]{0.5\textwidth}{発行日 ...... \@date}
+    \parbox<y>[c]{0.5\textwidth}{\hspace{0.5em}発行\hspace{0.5em} ...... \group}
+    \parbox<y>[c]{0.5\textwidth}{\hspace{0.5em}印刷\hspace{0.5em} ...... \publisher}
+    \parbox<y>[c]{0.5\textwidth}{連絡先 ...... \contact}
+    \hspace*{0.25em}
     \vspace*{\stretch{1}}
     \vrule
 }
@@ -65,8 +107,24 @@
 \maketitle
 \tableofcontents
 
+\vspace*{2em}
+表紙デザイン \―― \raisebox{0.15em}{\coverauthor}
+
 \twocolumn
-\input{index.txt}
+\IfFileExists{./works.txt}{\input{./works.txt}}{%
+    \IfFileExists{./work/input.tex}{\input{./work/input.tex}}{%
+        \onecolumn%
+        \parbox<y>[c]{0.5\textwidth}{%
+            Please run:\\\texttt{echo '{\textbackslash}input\{work/<author>/<title>/main.tex\}' > ./work/input.tex}%
+        }%
+        \twocolumn%
+    }%
+}
+
+\input{./src/commentaries.tex}
+\input{./src/afterwords.tex}
+\input{./src/questionnaire.tex}
 
 \Colophon
+
 \end{document}

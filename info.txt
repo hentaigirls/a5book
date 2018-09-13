@@ -1,0 +1,11 @@
+\newcommand{\booktitle}{TITLE}
+\newcommand{\bookauthor}{AUTHOR}
+\newcommand{\commentariesauthor}{COMMENTARIES AUTHOR}
+\newcommand{\coverauthor}{COVER AUTHOR}
+\newcommand{\contact}{CONTACT}
+\newcommand{\group}{CIRCLE NAME}
+\newcommand{\publisher}{PUBLISHER}
+\newcommand{\publishdate}{PUBLISH DATE}
+\renewcommand{\contentsname}{CONTENTS NAME}
+
+\newcommand{\questionnaireurl}{QUESTIONNAIRE URL}
