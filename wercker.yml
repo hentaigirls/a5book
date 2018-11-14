@@ -14,7 +14,7 @@ build:
         code: |
           mkdir -p $WERCKER_CACHE_DIR/cache/font
           mkdir -p /root/.texlive2018/texmf-var/luatexja/
-          cp "$WERCKER_CACHE_DIR/cache/font/*" /root/.texlive2018/texmf-var/luatexja/
+          find $WERCKER_CACHE_DIR/cache/font -type f -exec cp -v {} /root/.texlive2018/texmf-var/luatexja/ \;
     - script:
         name: compile document
         code: |
@@ -24,4 +24,4 @@ build:
     - script:
         name: save cache
         code: |
-          cp "/root/.texlive2018/texmf-var/luatexja/*" $WERCKER_CACHE_DIR/cache/font/
+          find /root/.texlive2018/texmf-var/luatexja/ -type f -exec cp -v {} $WERCKER_CACHE_DIR/cache/font/ \;
