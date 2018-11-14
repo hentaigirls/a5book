@@ -6,6 +6,8 @@
 \usepackage{changepage}
 \usepackage{luatexja-otf}
 \usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{pxrubrica}
 
 % documentinfomation
 \input{info.txt}
@@ -43,7 +45,7 @@
     \hspace*{1em}
     \hspace*{\stretch{1}}
     \vspace*{\stretch{1}}
-    \addcontentsline{toc}{section}{#1\hspace*{0.5em}\――\hspace*{0.5em}#2}
+    \addcontentsline{toc}{section}{#1}
     \twocolumn
     \clearpage
 }
@@ -105,10 +107,18 @@
 % body
 \begin{document}
 \maketitle
+\clearpage
+\IfFileExists{./work/opening/main.tex}{%
+    \input{./work/opening/main.tex}%
+}{}
 \tableofcontents
 
 \vspace*{2em}
-表紙デザイン \―― \raisebox{0.15em}{\coverauthor}
+\IfFileExists{./work/opening/main.tex}{%
+    {\openingtitle}\hspace*{0.5em}\――\hspace*{0.5em}{\openingauthor}
+}{}
+
+表紙デザイン\hspace*{0.5em}\――\hspace*{0.5em}{\coverauthor}
 
 \twocolumn
 \IfFileExists{./works.txt}{\input{./works.txt}}{%
@@ -121,9 +131,25 @@
     }%
 }
 
-\input{./src/commentaries.tex}
-\input{./src/afterwords.tex}
-\input{./src/questionnaire.tex}
+\IfFileExists{./figure/afterwords.png}{%
+    \clearpage
+    \onecolumn
+    \parbox<y>[]{1.0\textheight}{\centering \textbf{たのしい手書きあとがきコーナー}}
+    \hspace*{0.25em}
+    \parbox<y>[]{1.0\textheight}{\includegraphics[]{./figure/afterwords.png}}%
+}{}
+
+\IfFileExists{./figure/form.pdf}{%
+    \clearpage
+    \onecolumn
+    \thispagestyle{empty}
+    \vspace*{\stretch{1}}
+    \hspace*{\stretch{1}}
+    \parbox<y>[c]{0.5\textwidth}{\centering \small{ここから「\booktitle」の感想をお聞かせください！}}
+    \parbox<y>[c]{0.5\textwidth}{\centering \includegraphics[width=5cm]{./figure/form.pdf}} \parbox<y>[c]{0.5\textwidth}{\centering または、\texttt{\questionnaireurl}}%
+    \hspace*{\stretch{1}}
+    \vspace*{\stretch{1}}
+}{}
 
 \Colophon
 

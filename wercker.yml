@@ -3,7 +3,12 @@ box: amane/lualatex-latexmk:latest
 build:
   steps:
     - script:
+        name: test document (FYI)
+        code: |
+          redpen-runner ./${WERCKER_GIT_BRANCH}/main.tex || true
+    - script:
         name: compile document
         code: |
+          ./script/make_story_list.sh
           latexmk
           cp build/book.pdf ${WERCKER_REPORT_ARTIFACTS_DIR}/
