@@ -1,11 +1,14 @@
-box: amane/lualatex-latexmk:latest
-
-build:
+test:
+  box: amane/lualatex-latexmk:latest
   steps:
     - script:
         name: test document (FYI)
         code: |
           redpen-runner ./${WERCKER_GIT_BRANCH}/main.tex || true
+
+build:
+  box: amane/lualatex-latexmk:latest
+  steps:
     - script:
         name: compile document
         code: |
