@@ -1,13 +1,14 @@
 \documentclass[twocolumn,twoside,a5j]{ltjtbook}
 % packages
 \usepackage{luatexja}
-\usepackage[sourcehan]{luatexja-preset}
+\usepackage{luatexja-fontspec}
 \usepackage{bxjaprnind}
 \usepackage{changepage}
 \usepackage{luatexja-otf}
 \usepackage{graphicx}
 \usepackage{setspace}
 \usepackage{pxrubrica}
+\usepackage[x-1a]{pdfx}
 
 % documentinfomation
 \input{info.txt}
@@ -22,6 +23,8 @@
 \let\oddsidemargin\evensidemargin
 \let\evensidemargin\tmp
 \reversemarginpar
+\setmainjfont[BoldFont=GenEi Gothic N SemiBold]{GenEi Koburi Mincho}
+\setsansjfont{GenEi Gothic N}
 
 % (re)newcommands
 \def\――{\rule[0pt]{2\zw}{.25pt}}
