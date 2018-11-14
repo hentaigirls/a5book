@@ -29,3 +29,20 @@
 1. `./work/opening/main.tex` を編集します。
 1. `./work/opening/LICENSE` に適切なライセンス表示を追加します。
 1. `latexmk` を実行するか、push後にCIの結果を確認します。
+
+## Tips
+
+### `./figure/form.pdf`
+
+おおよそ1181x1181（600dpi/5cm）の画像を含んだPDFの作り方のサンプルです。
+
+```
+qrencode "https://goo.gl/forms/XXXXXXXXXX" -o /tmp/qrcode.png
+WIDTH=$(identify /tmp/qrcode.png | cut -f3 -d" " | cut -f1 -d "x")
+mogrify -scale $(echo "(1181/$WIDTH+1)*$WIDTH" | bc) /tmp/qrcode.png
+convert -density 600x600 -units PixelsPerInch /tmp/qrcode.png ./figure/form.pdf
+```
+
+### `./figure/afterwords.png`
+
+過去、2634x4050の画像が使われています。
