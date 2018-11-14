@@ -10,8 +10,18 @@ build:
   box: amane/lualatex-latexmk:latest
   steps:
     - script:
+        name: load cache
+        code: |
+          mkdir -p $WERCKER_CACHE_DIR/cache/font
+          mkdir /root/.texlive2018/texmf-var/luatexja/
+          cp "$WERCKER_CACHE_DIR/cache/font/*" /root/.texlive2018/texmf-var/luatexja/
+    - script:
         name: compile document
         code: |
           ./script/make_story_list.sh
           latexmk
           cp build/book.pdf ${WERCKER_REPORT_ARTIFACTS_DIR}/
+    - script:
+        name: save cache
+        code: |
+          cp "/root/.texlive2018/texmf-var/luatexja/*" $WERCKER_CACHE_DIR/cache/font/
