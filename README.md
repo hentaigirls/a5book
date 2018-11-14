@@ -1,5 +1,7 @@
 # a5book
 
+[![wercker status](https://app.wercker.com/status/20d9d80cf879d1398b0f2c925a00cd4f/s/master "wercker status")](https://app.wercker.com/project/byKey/20d9d80cf879d1398b0f2c925a00cd4f)
+
 ## 使い方
 
 ### 統括を行う人
