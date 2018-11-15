@@ -23,8 +23,10 @@
 \let\oddsidemargin\evensidemargin
 \let\evensidemargin\tmp
 \reversemarginpar
-\setmainjfont[BoldFont=GenEi Gothic N SemiBold]{GenEi Koburi Mincho}
-\setsansjfont{GenEi Gothic N}
+\IfFontExistsTF{GenEi Koburi Mincho}{%
+    \setmainjfont[BoldFont=GenEi Gothic N SemiBold]{GenEi Koburi Mincho}
+    \setsansjfont{GenEi Gothic N}
+}{}
 
 % (re)newcommands
 \def\――{\rule[0pt]{2\zw}{.25pt}}
