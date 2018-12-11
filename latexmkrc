@@ -1,4 +1,4 @@
 #!/usr/bin/perl
 $out_dir = 'build';
-$pdflatex = 'lualatex -synctex=1 %O %S';
-$pdf_mode = 1;
+$lualatex = 'lualatex -synctex=1 -file-line-error -halt-on-error -interaction=nonstopmode %O %S';
+$pdf_mode = 4;
