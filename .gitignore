@@ -221,3 +221,4 @@ TSWLatexianTemp*
 
 build/*
 work/input.tex
+*.ltjruby
