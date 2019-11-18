@@ -1,5 +1,5 @@
 test:
-  box: amane/lualatex-latexmk:latest
+  box: amane/redpen-hentaigirls:latest
   steps:
     - script:
         name: test document (FYI)
