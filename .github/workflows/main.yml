@@ -1,0 +1,15 @@
+name: 'build a5book template'
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: amane/lualatex-latexmk:latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: compile document
+      run: |
+        ./script/make_story_list.sh
+        latexmk
