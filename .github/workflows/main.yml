@@ -6,10 +6,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: amane/lualatex-latexmk:latest
+      image: amane/lualatex-latexmk:2019.1
     steps:
     - uses: actions/checkout@v1
     - name: compile document
       run: |
         ./script/make_story_list.sh
         latexmk
+    - name: upload document
+      uses: actions/upload-artifact@v1
+      with:
+        name: build/book.pdf
+        path: book.pdf
