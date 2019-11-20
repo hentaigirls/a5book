@@ -16,5 +16,5 @@ jobs:
     - name: upload document
       uses: actions/upload-artifact@v1
       with:
-        name: book.pdf
-        path: build/book.pdf
+        name: build
+        path: build
