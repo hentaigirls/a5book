@@ -1,6 +1,5 @@
 \newcommand{\booktitle}{TITLE}
 \newcommand{\bookauthor}{AUTHOR}
-\newcommand{\commentariesauthor}{COMMENTARIES AUTHOR}
 \newcommand{\coverauthor}{COVER AUTHOR}
 \newcommand{\openingtitle}{OPENING TITLE}
 \newcommand{\openingauthor}{OPENING AUTHOR}

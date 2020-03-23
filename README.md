@@ -1,6 +1,6 @@
 # a5book
 
-[![wercker status](https://app.wercker.com/status/20d9d80cf879d1398b0f2c925a00cd4f/s/master "wercker status")](https://app.wercker.com/project/byKey/20d9d80cf879d1398b0f2c925a00cd4f)
+![GitHub Action status](https://github.com/hentaigirls/a5book/workflows/build%20a5book%20template/badge.svg)
 
 ## 使い方
 

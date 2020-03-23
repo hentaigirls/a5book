@@ -9,6 +9,11 @@
 \usepackage{setspace}
 \usepackage{luatexja-ruby}
 \usepackage[x-1a]{pdfx}
+\usepackage{fancyhdr}
+
+% flag
+\newif\ifsinglemode
+%\singlemodetrue
 
 % documentinfomation
 \input{info.txt}
@@ -19,10 +24,18 @@
 % config
 \parheadparenindentamount{-0.5}
 \topmargin-1.8cm\advance\textwidth1.3cm
+\ifsinglemode
+\fancyhead[RO]{\thepage}
+\fancyhead[LE]{\thepage}
+\fancyheadoffset{0mm}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
+\else
 \let\tmp\oddsidemargin
 \let\oddsidemargin\evensidemargin
 \let\evensidemargin\tmp
 \reversemarginpar
+\fi
 \IfFontExistsTF{GenEi Koburi Mincho}{%
     \setmainjfont[BoldFont=GenEi Gothic N SemiBold]{GenEi Koburi Mincho}
     \setsansjfont{GenEi Gothic N}
@@ -58,6 +71,7 @@
     \begin{center}＊\end{center}
 }
 \makeatletter
+\def\contentsline#1#2#3#4{\csname l@#1\endcsname{\hyper@linkstart{link}{#4}{#2}\hyper@linkend}{\rensuji{#3}}}
 \renewcommand{\@dotsep}{10000}
 \renewcommand\maketitle{
     \onecolumn
@@ -111,6 +125,7 @@
 
 % body
 \begin{document}
+\unless\ifsinglemode
 \maketitle
 \clearpage
 \IfFileExists{./work/opening/main.tex}{%
@@ -124,8 +139,19 @@
 }{}
 
 表紙デザイン\hspace*{0.5em}\――\hspace*{0.5em}{\coverauthor}
+\fi
 
 \twocolumn
+\ifsinglemode
+\section*{\booktitle}
+\begin{flushright}\bookauthor\end{flushright}
+
+%%%%% シングルモードの本文 %%%%%
+
+\begin{flushright}おわり\end{flushright}
+\vspace*{\stretch{1}}
+% \small{\textbf{\booktitle}の全文は\textbf{\bookauthor}によって\textbf{CC BY 4.0}でライセンスされており、ライセンスの条件に従っている限り自由に利用できます。}
+\else
 \IfFileExists{./works.txt}{\input{./works.txt}}{%
     \IfFileExists{./work/input.tex}{\input{./work/input.tex}}{%
         \onecolumn%
@@ -135,6 +161,7 @@
         \twocolumn%
     }%
 }
+\fi
 
 \IfFileExists{./figure/afterwords.png}{%
     \clearpage
@@ -156,6 +183,8 @@
     \vspace*{\stretch{1}}
 }{}
 
+\unless\ifsinglemode
 \Colophon
+\fi
 
 \end{document}
