@@ -10,6 +10,7 @@
 \usepackage{luatexja-ruby}
 \usepackage[x-1a]{pdfx}
 \usepackage{fancyhdr}
+\usepackage[mark={＊}, skip=1\zh]{sectionbreak}
 
 % flag
 \newif\ifsinglemode
@@ -67,9 +68,7 @@
     \twocolumn
     \clearpage
 }
-\newcommand{\Sepa}[0]{
-    \begin{center}＊\end{center}
-}
+\newcommand{\Sepa}{\sectionbreak}
 \makeatletter
 \def\contentsline#1#2#3#4{\csname l@#1\endcsname{\hyper@linkstart{link}{#4}{#2}\hyper@linkend}{\rensuji{#3}}}
 \renewcommand{\@dotsep}{10000}
