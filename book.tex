@@ -1,3 +1,16 @@
+\begin{filecontents*}[overwrite]{\jobname.xmpdata}
+  \Title{\booktitle}
+  \ifdefined\bookdescription\Subject{\bookdescription}\fi
+  \ifdefined\bookkeywords\Keywords{\bookkeywords}\fi
+  \ifdefined\xmpauthors\Author{\xmpauthors}\fi
+  \Language{ja-JP}
+  \Publisher{\group \sep \publisher}
+  \Copyright{\license}
+  \ifdefined\licenseurl\CopyrightURL{\licenseurl}\fi
+  \ifdefined\downloadurl\URLlink{\downloadurl}\fi
+  \Date{\publishisodate}
+\end{filecontents*}
+
 \documentclass[twocolumn,twoside,a5j]{ltjtbook}
 % packages
 \usepackage{luatexja}
@@ -8,7 +21,6 @@
 \usepackage{graphicx}
 \usepackage{setspace}
 \usepackage{luatexja-ruby}
-\usepackage[x-1a]{pdfx}
 \usepackage{fancyhdr}
 \usepackage[mark={＊}, skip=1\zh]{sectionbreak}
 
@@ -17,10 +29,13 @@
 %\singlemodetrue
 
 % documentinfomation
+\newcommand{\license}{法律で認められている範囲を超えた無断複製・無断転載を禁じます。}
 \input{info.txt}
 \title{\booktitle}
 \author{\bookauthor}
 \date{\publishdate}
+\usepackage{luatex85}
+\usepackage[a-2u,pdf17]{pdfx}
 
 % config
 \parheadparenindentamount{-0.5}
@@ -104,9 +119,14 @@
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
     \hspace*{\stretch{1}}
-    \parbox<y>[c]{0.5\textwidth}{\small{法律で認められている範囲を超えた無断複製・無断転載を禁じます。}}
-    % \hspace*{0.5em}
-    % \parbox<y>[c]{0.5\textwidth}{\small{ただし、「_____」の全文はCC BY 4.0でライセンスされており、ライセンスの条件に従っている限り自由に利用できます。CC BY 4.0の詳細は以下のURLで確認できます。\\\texttt{https://creativecommons.org/licenses/by/4.0/}}}
+    \parbox<y>[c]{0.5\textwidth}{\small{\license%
+    \ifdefined\licenseurl%
+        ライセンスの詳細は以下のURLで確認できます。\\\texttt{\licenseurl}%
+    \fi}}
+    \ifdefined\downloadurl%
+        \hspace*{0.25em}
+        \parbox<y>[c]{0.5\textwidth}{\small{以下のURLから最新のPDF版をダウンロードできます。\\\texttt{\downloadurl}}}
+    \fi
     \vspace*{\stretch{1}}
     \clearpage
     \thispagestyle{empty}
