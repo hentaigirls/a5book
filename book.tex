@@ -20,17 +20,22 @@
   \Date{\publishisodate}
 \end{filecontents*}
 
-\documentclass[twocolumn,twoside,a5j]{ltjtbook}
+\documentclass[lualatex,
+book,tate,twoside,
+paper=a5,twocolumn,
+open_bracket_pos=nibu_tentsuki,
+jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658pt
+]{jlreq}
 % packages
 \usepackage{luatexja}
 \usepackage{luatexja-fontspec}
-\usepackage{bxjaprnind}
 \usepackage{changepage}
 \usepackage{luatexja-otf}
 \usepackage{graphicx}
 \usepackage{setspace}
 \usepackage{luatexja-ruby}
 \usepackage{fancyhdr}
+\usepackage{lltjext}
 \usepackage[mark={＊}, skip=1\zh]{sectionbreak}
 
 % flag
@@ -38,7 +43,7 @@
 %\singlemodetrue
 
 % documentinfomation
-\newcommand{\license}{法律で認められている範囲を超えた無断複製・無断転載を禁じます。}
+\newcommand{\license}{表紙イラストを含む全ての作品は作者が権利を留保しており、法律で認められている範囲を超えた無断複製・無断転載を禁じます。}
 \input{info.txt}
 \title{\booktitle}
 \author{\bookauthor}
@@ -48,11 +53,12 @@
 % \usepackage[x-4,pdf16]{pdfx}
 
 % config
-\parheadparenindentamount{-0.5}
-\newcommand{\topmargincm}[0]{-1.8cm}
-\newcommand{\yokoboxwidth}[0]{0.5\textwidth} % 奥付やライセンス表示などの幅
-\newcommand{\titleboxwidth}[0]{0.55\textwidth} % 作品タイトルの幅
-\topmargin\topmargincm\advance\textwidth1.3cm
+\newcommand{\topmarginpt}[0]{-50.1266pt} % -head_space
+\newcommand{\yokoboxwidth}[0]{257.49433pt} % 奥付やライセンス表示などの幅
+\newcommand{\titleboxwidth}[0]{283.243763pt} % 作品タイトルの幅
+\textwidth514.98866pt
+\textheight320.0pt
+\oddsidemargin-26.0pt\evensidemargin-6.0pt
 \ifsinglemode
 \fancyhead[RO]{\thepage}
 \fancyhead[LE]{\thepage}
@@ -60,10 +66,6 @@
 \renewcommand{\headrulewidth}{0pt}
 \pagestyle{fancy}
 \else
-\let\tmp\oddsidemargin
-\let\oddsidemargin\evensidemargin
-\let\evensidemargin\tmp
-\reversemarginpar
 \fi
 \IfFontExistsTF{GenEi Koburi Mincho}{%
     \setmainjfont[YokoFeatures={JFM=jlreq}, TateFeatures={JFM=jlreqv}, BoldFont=GenEi Gothic N SemiBold]{GenEi Koburi Mincho}
@@ -87,7 +89,7 @@
     \onecolumn
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
-    \hspace*{\topmargincm}
+    \hspace*{\topmarginpt}
     \hspace*{\stretch{1}}
     \hspace*{1em}
     \parbox<y>[c]{\titleboxwidth}{\centering \Huge #1}
@@ -105,7 +107,7 @@
     \onecolumn
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
-    \hspace*{\topmargincm}
+    \hspace*{\topmarginpt}
     \hspace*{\stretch{1}}
     \vrule
     \hspace*{1em}
@@ -159,6 +161,10 @@
 \renewcommand{\@dotsep}{10000}
 \makeatother
 
+\jlreqsetup{
+    reference_mark=interlinear
+}
+
 % body
 \begin{document}
 \unless\ifsinglemode
@@ -174,7 +180,7 @@
     {\openingtitle}\hspace*{0.5em}\――\hspace*{0.5em}{\openingauthor}
 }{}
 
-表紙デザイン\hspace*{0.5em}\――\hspace*{0.5em}{\coverauthor}
+\noindent 表紙デザイン\hspace*{0.5em}\――\hspace*{0.5em}{\coverauthor}
 \fi
 
 \twocolumn
