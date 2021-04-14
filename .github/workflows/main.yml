@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: amane/lualatex-latexmk:2021.1
+      image: amane/lualatex-latexmk:2021.2
     steps:
     - uses: actions/checkout@v1
     - name: compile document
