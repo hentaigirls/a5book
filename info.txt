@@ -1,12 +1,19 @@
 \newcommand{\booktitle}{TITLE}
 \newcommand{\bookauthor}{AUTHOR}
 \newcommand{\coverauthor}{COVER AUTHOR}
+\newcommand{\xmpauthors}{XMP \sep AUTHOR \sep LIST}
 \newcommand{\openingtitle}{OPENING TITLE}
 \newcommand{\openingauthor}{OPENING AUTHOR}
 \newcommand{\contact}{CONTACT}
 \newcommand{\group}{CIRCLE NAME}
 \newcommand{\publisher}{PUBLISHER}
 \newcommand{\publishdate}{PUBLISH DATE}
+\newcommand{\publishisodate}{1970-01-01}
 \renewcommand{\contentsname}{CONTENTS NAME}
 
-\newcommand{\questionnaireurl}{QUESTIONNAIRE URL}
+% \newcommand{\bookdescription}{DESCRIPTION}
+% \newcommand{\bookkeywords}{BOOK \sep KEYWORD \sep LIST}
+% \renewcommand{\license}{表紙イラストを含む全ての作品はCC BY 4.0でライセンスされており、ライセンスの条件に従っている限り自由に利用できます。}
+% \newcommand{\licenseurl}{https://creativecommons.org/licenses/by/4.0/}
+% \newcommand{\downloadurl}{DOWNLOAD URL}
+% \newcommand{\questionnaireurl}{QUESTIONNAIRE URL}

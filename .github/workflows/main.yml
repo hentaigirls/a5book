@@ -6,13 +6,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: amane/lualatex-latexmk:2020.1
+      image: amane/lualatex-latexmk:2021.1
     steps:
     - uses: actions/checkout@v1
     - name: compile document
       run: |
         ./script/make_story_list.sh
-        latexmk
+        llmk book.tex
     - name: upload document
       uses: actions/upload-artifact@v1
       with:

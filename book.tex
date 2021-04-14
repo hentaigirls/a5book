@@ -1,3 +1,25 @@
+% +++
+% sequence = ["latex", "latex"]
+% [programs.latex]
+% command = "lualatex"
+% opts = ["-synctex=1", "-file-line-error", "-halt-on-error", "-interaction=nonstopmode", "-output-directory=\"build\""]
+% aux_file = "%B.aux"
+% aux_empty_size = 9
+% +++
+
+\begin{filecontents*}[overwrite]{\jobname.xmpdata}
+  \Title{\booktitle}
+  \ifdefined\bookdescription\Subject{\bookdescription}\fi
+  \ifdefined\bookkeywords\Keywords{\bookkeywords}\fi
+  \ifdefined\xmpauthors\Author{\xmpauthors}\fi
+  \Language{ja-JP}
+  \Publisher{\group \sep \publisher}
+  \Copyright{\license}
+  \ifdefined\licenseurl\CopyrightURL{\licenseurl}\fi
+  \ifdefined\downloadurl\URLlink{\downloadurl}\fi
+  \Date{\publishisodate}
+\end{filecontents*}
+
 \documentclass[twocolumn,twoside,a5j]{ltjtbook}
 % packages
 \usepackage{luatexja}
@@ -8,7 +30,6 @@
 \usepackage{graphicx}
 \usepackage{setspace}
 \usepackage{luatexja-ruby}
-\usepackage[x-1a]{pdfx}
 \usepackage{fancyhdr}
 \usepackage[mark={＊}, skip=1\zh]{sectionbreak}
 
@@ -17,14 +38,21 @@
 %\singlemodetrue
 
 % documentinfomation
+\newcommand{\license}{法律で認められている範囲を超えた無断複製・無断転載を禁じます。}
 \input{info.txt}
 \title{\booktitle}
 \author{\bookauthor}
 \date{\publishdate}
+\usepackage{luatex85}
+\usepackage[a-2u,pdf17]{pdfx}
+% \usepackage[x-4,pdf16]{pdfx}
 
 % config
 \parheadparenindentamount{-0.5}
-\topmargin-1.8cm\advance\textwidth1.3cm
+\newcommand{\topmargincm}[0]{-1.8cm}
+\newcommand{\yokoboxwidth}[0]{0.5\textwidth} % 奥付やライセンス表示などの幅
+\newcommand{\titleboxwidth}[0]{0.55\textwidth} % 作品タイトルの幅
+\topmargin\topmargincm\advance\textwidth1.3cm
 \ifsinglemode
 \fancyhead[RO]{\thepage}
 \fancyhead[LE]{\thepage}
@@ -59,12 +87,12 @@
     \onecolumn
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
-    \hspace*{-1.8cm}
+    \hspace*{\topmargincm}
     \hspace*{\stretch{1}}
     \hspace*{1em}
-    \parbox<y>[c]{0.55\textwidth}{\centering \Huge #1}
+    \parbox<y>[c]{\titleboxwidth}{\centering \Huge #1}
     \hspace*{1em}
-    \parbox<y>[c]{0.5\textwidth}{\centering \large #2}
+    \parbox<y>[c]{\yokoboxwidth}{\centering \large #2}
     \hspace*{1em}
     \hspace*{\stretch{1}}
     \vspace*{\stretch{1}}
@@ -73,20 +101,17 @@
     \clearpage
 }
 \newcommand{\Sepa}{\sectionbreak}
-\makeatletter
-\def\contentsline#1#2#3#4{\csname l@#1\endcsname{\hyper@linkstart{link}{#4}{#2}\hyper@linkend}{\rensuji{#3}}}
-\renewcommand{\@dotsep}{10000}
 \renewcommand\maketitle{
     \onecolumn
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
-    \hspace*{-1.8cm}
+    \hspace*{\topmargincm}
     \hspace*{\stretch{1}}
     \vrule
     \hspace*{1em}
-    \parbox<y>[c]{0.5\textwidth}{\centering \Huge \@title }
+    \parbox<y>[c]{\yokoboxwidth}{\centering \Huge \booktitle }
     \hspace*{1em}
-    \parbox<y>[c]{0.5\textwidth}{\centering \large \@author }
+    \parbox<y>[c]{\yokoboxwidth}{\centering \large \bookauthor }
     \hspace*{1em}
     \vrule
     \hspace*{\stretch{1}}
@@ -104,9 +129,14 @@
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
     \hspace*{\stretch{1}}
-    \parbox<y>[c]{0.5\textwidth}{\small{法律で認められている範囲を超えた無断複製・無断転載を禁じます。}}
-    % \hspace*{0.5em}
-    % \parbox<y>[c]{0.5\textwidth}{\small{ただし、「_____」の全文はCC BY 4.0でライセンスされており、ライセンスの条件に従っている限り自由に利用できます。CC BY 4.0の詳細は以下のURLで確認できます。\\\texttt{https://creativecommons.org/licenses/by/4.0/}}}
+    \parbox<y>[c]{\yokoboxwidth}{\small{\license%
+    \ifdefined\licenseurl%
+        ライセンスの詳細は以下のURLで確認できます。\\\texttt{\licenseurl}%
+    \fi}}
+    \ifdefined\downloadurl%
+        \hspace*{0.25em}
+        \parbox<y>[c]{\yokoboxwidth}{\small{以下のURLから最新のPDF版をダウンロードできます。\\\texttt{\downloadurl}}}
+    \fi
     \vspace*{\stretch{1}}
     \clearpage
     \thispagestyle{empty}
@@ -115,15 +145,18 @@
     \vrule
     \vspace*{\stretch{1}}
     \hspace*{0.25em}
-    \parbox<y>[c]{0.5\textwidth}{\hspace{0.5em}書名\hspace{0.5em} ...... \@title}
-    \parbox<y>[c]{0.5\textwidth}{発行日 ...... \@date}
-    \parbox<y>[c]{0.5\textwidth}{\hspace{0.5em}発行\hspace{0.5em} ...... \group}
-    \parbox<y>[c]{0.5\textwidth}{\hspace{0.5em}印刷\hspace{0.5em} ...... \publisher}
-    \parbox<y>[c]{0.5\textwidth}{連絡先 ...... \contact}
+    \parbox<y>[c]{\yokoboxwidth}{\hspace{0.5em}書名\hspace{0.5em} ...... \booktitle}
+    \parbox<y>[c]{\yokoboxwidth}{発行日 ...... \publishdate}
+    \parbox<y>[c]{\yokoboxwidth}{\hspace{0.5em}発行\hspace{0.5em} ...... \group}
+    \parbox<y>[c]{\yokoboxwidth}{\hspace{0.5em}印刷\hspace{0.5em} ...... \publisher}
+    \parbox<y>[c]{\yokoboxwidth}{連絡先 ...... \contact}
     \hspace*{0.25em}
     \vspace*{\stretch{1}}
     \vrule
 }
+\makeatletter
+\def\contentsline#1#2#3#4{\csname l@#1\endcsname{\hyper@linkstart{link}{#4}{#2}\hyper@linkend}{\rensuji{#3}}}
+\renewcommand{\@dotsep}{10000}
 \makeatother
 
 % body
@@ -158,7 +191,7 @@
 \IfFileExists{./works.txt}{\input{./works.txt}}{%
     \IfFileExists{./work/input.tex}{\input{./work/input.tex}}{%
         \onecolumn%
-        \parbox<y>[c]{0.5\textwidth}{%
+        \parbox<y>[c]{\yokoboxwidth}{%
             Please run:\\\texttt{echo '{\textbackslash}input\{work/<author>/<title>/main.tex\}' > ./work/input.tex}%
         }%
         \twocolumn%
@@ -180,8 +213,8 @@
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
     \hspace*{\stretch{1}}
-    \parbox<y>[c]{0.5\textwidth}{\centering \small{ここから「\booktitle」の感想をお聞かせください！}}
-    \parbox<y>[c]{0.5\textwidth}{\centering \includegraphics[width=5cm]{./figure/form.pdf}} \parbox<y>[c]{0.5\textwidth}{\centering または、\texttt{\questionnaireurl}}%
+    \parbox<y>[c]{\yokoboxwidth}{\centering \small{ここから「\booktitle」の感想をお聞かせください！}}
+    \parbox<y>[c]{\yokoboxwidth}{\centering \includegraphics[width=5cm]{./figure/form.pdf}} \parbox<y>[c]{\yokoboxwidth}{\centering または、\texttt{\questionnaireurl}}%
     \hspace*{\stretch{1}}
     \vspace*{\stretch{1}}
 }{}
