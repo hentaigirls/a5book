@@ -9,7 +9,7 @@
 \newcommand{\publisher}{PUBLISHER}
 \newcommand{\publishdate}{PUBLISH DATE}
 \newcommand{\publishisodate}{1970-01-01}
-\renewcommand{\contentsname}{CONTENTS NAME}
+\renewcommand{\contentsname}{もくじ}
 
 % \newcommand{\bookdescription}{DESCRIPTION}
 % \newcommand{\bookkeywords}{BOOK \sep KEYWORD \sep LIST}
