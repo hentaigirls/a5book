@@ -52,8 +52,12 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \author{\bookauthor}
 \date{\publishdate}
 \usepackage{luatex85}
+\ifprintmode
+\usepackage[x-1a,pdf13]{pdfx}
+\else
 \usepackage[a-2u,pdf17]{pdfx}
-% \usepackage[x-4,pdf16]{pdfx}
+\pdfvariable omitcidset=1
+\fi
 
 % config
 \newcommand{\topmarginpt}[0]{-50.1266pt} % -head_space
