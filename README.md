@@ -32,6 +32,12 @@
 1. `./work/opening/LICENSE` に適切なライセンス表示を追加します。
 1. `llmk book.tex` を実行するか、push後にCIの結果を確認します。
 
+### 表紙を追加する人
+
+1. `./figure/cover1.pdf` に表1を追加します。
+1. `./figure/cover4.pdf` に表4を追加します。
+1. `llmk book.tex` を実行するか、push後にCIの結果を確認します（ `printmode` がtrueの場合は表紙が出力されません）。
+
 ## Tips
 
 ### `./figure/form.pdf`

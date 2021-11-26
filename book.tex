@@ -37,10 +37,13 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \usepackage{fancyhdr}
 \usepackage{lltjext}
 \usepackage[mark={＊}, skip=1\zh]{sectionbreak}
+\usepackage{pdfpages}
 
 % flag
 \newif\ifsinglemode
 %\singlemodetrue
+\newif\ifprintmode
+%\printmodetrue
 
 % documentinfomation
 \newcommand{\license}{表紙イラストを含む全ての作品は作者が権利を留保しており、法律で認められている範囲を超えた無断複製・無断転載を禁じます。}
@@ -168,6 +171,16 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 % body
 \begin{document}
 \unless\ifsinglemode
+\ifprintmode\else
+\IfFileExists{./figure/cover1.pdf}{%
+    \null
+    \setcounter{page}{-1}%
+    \includepdf[pages=-]{./figure/cover1.pdf}%
+    \thispagestyle{empty}
+    \hspace*{\stretch{1}}
+    \clearpage%
+}{}
+\fi
 \maketitle
 \clearpage
 \IfFileExists{./work/opening/main.tex}{%
@@ -227,6 +240,15 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 
 \unless\ifsinglemode
 \Colophon
+\ifprintmode\else
+\IfFileExists{./figure/cover4.pdf}{%
+    \clearpage%
+    \thispagestyle{empty}
+    \hspace*{\stretch{1}}
+    \clearpage%
+    \includepdf[pages=-]{./figure/cover4.pdf}%
+}{}
+\fi
 \fi
 
 \end{document}
