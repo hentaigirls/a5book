@@ -37,12 +37,20 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \usepackage{lltjext}
 \usepackage[mark={＊}, skip=1\zh]{sectionbreak}
 \usepackage{pdfpages}
+\usepackage{amsfonts}
+\usepackage[pdfdirection=R2L]{hyperref}
+\usepackage{titlesec}
 
 % flag
 \newif\ifsinglemode
 %\singlemodetrue
-\newif\ifprintmode
-%\printmodetrue
+
+\makeatletter
+\@ifundefined{ifprintmode}{%
+  \newif\ifprintmode
+  %\printmodetrue
+}{}
+\makeatother
 
 % documentinfomation
 \newcommand{\license}{表紙イラストを含む全ての作品は作者が権利を留保しており、法律で認められている範囲を超えた無断複製・無断転載を禁じます。}
@@ -82,6 +90,8 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \setmainjfont[YokoFeatures={JFM=jlreq}, TateFeatures={JFM=jlreqv}, BoldFont=GenEi Gothic N SemiBold]{GenEi Koburi Mincho v6}
     \setsansjfont[YokoFeatures={JFM=jlreq}, TateFeatures={JFM=jlreqv}]{GenEi Gothic N}
 }{}
+\hypersetup{unicode,hidelinks}
+\titleformat{\subsection}[block]{\large\bfseries}{}{}{}
 
 % (re)newcommands
 \def\――{\rule[0pt]{2\zw}{.25pt}}
@@ -95,6 +105,8 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \fi
     \onecolumn
     \thispagestyle{empty}
+    \phantomsection
+    \addcontentsline{toc}{section}{#1}
     \vspace*{\stretch{1}}
     \hspace*{\topmarginpt}
     \hspace*{\stretch{1}}
@@ -105,11 +117,10 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \hspace*{1em}
     \hspace*{\stretch{1}}
     \vspace*{\stretch{1}}
-    \addcontentsline{toc}{section}{#1}
     \twocolumn
     \clearpage
 }
-\newcommand{\Sepa}{\sectionbreak}
+\newcommand{\sectionpause}{\vspace{\baselineskip}}
 \renewcommand\maketitle{
     \onecolumn
     \thispagestyle{empty}
@@ -126,6 +137,9 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \hspace*{\stretch{1}}
     \vspace*{\stretch{1}}
 }
+\newcommand{\Tocline}[2]{
+    \noindent {#1}\hspace*{0.5em}\――\hspace*{0.5em}{#2}
+}
 \newcommand{\Colophon}[0]{
     \onecolumn
     \clearpage
@@ -140,7 +154,7 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \hspace*{\stretch{1}}
     \parbox<y>[c]{\yokoboxwidth}{\small{\license%
     \ifdefined\licenseurl%
-        ライセンスの詳細は以下のURLで確認できます。\\\texttt{\licenseurl}%
+        \\ライセンスの詳細は以下のURLで確認できます。\\\texttt{\licenseurl}%
     \fi}}
     \ifdefined\downloadurl%
         \hspace*{0.25em}
@@ -157,7 +171,7 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \parbox<y>[c]{\yokoboxwidth}{\hspace{0.5em}書名\hspace{0.5em} ...... \booktitle}
     \parbox<y>[c]{\yokoboxwidth}{発行日 ...... \publishdate}
     \parbox<y>[c]{\yokoboxwidth}{\hspace{0.5em}発行\hspace{0.5em} ...... \group}
-    \parbox<y>[c]{\yokoboxwidth}{\hspace{0.5em}印刷\hspace{0.5em} ...... \publisher}
+    \parbox<y>[c]{\yokoboxwidth}{\hspace{0.5em}印刷\hspace{0.5em} ...... \ifprintmode\publisher\else（電子書籍版のため省略）\fi}
     \parbox<y>[c]{\yokoboxwidth}{連絡先 ...... \contact}
     \hspace*{0.25em}
     \vspace*{\stretch{1}}
@@ -188,16 +202,18 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \maketitle
 \clearpage
 \IfFileExists{./work/opening/main.tex}{%
+    \phantomsection
+    \addcontentsline{toc}{section}{\openingtitle}
     \input{./work/opening/main.tex}%
 }{}
 \tableofcontents
 
 \vspace*{2em}
 \IfFileExists{./work/opening/main.tex}{%
-    {\openingtitle}\hspace*{0.5em}\――\hspace*{0.5em}{\openingauthor}
+    \Tocline{\openingtitle}{\openingauthor}
 }{}
 
-\noindent 表紙デザイン\hspace*{0.5em}\――\hspace*{0.5em}{\coverauthor}
+\Tocline{表紙デザイン}{\coverauthor}
 \fi
 
 \twocolumn
