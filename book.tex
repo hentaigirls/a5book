@@ -73,9 +73,10 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \newcommand{\yokoboxwidth}[0]{257.49433pt} % 奥付やライセンス表示などの幅
 \newcommand{\booktitleboxwidth}[0]{257.49433pt} % 書名タイトル表示の幅
 \newcommand{\titleboxwidth}[0]{283.243763pt} % 作品タイトルの幅
-\textwidth514.98866pt
-\textheight320.0pt
-\oddsidemargin-26.0pt\evensidemargin-6.0pt
+\textwidth514.98866pt % 本文紙面の高さ
+\textheight320.0pt % 本文紙面の幅
+\oddsidemargin-26.0pt % 左ページの左余白（1inchからマイナスした値）
+\evensidemargin-6.0pt % 右ページの右余白（0からマイナスした値）
 \NewPageStyle{main}{
   nombre_position={top-left},
   nombre={\footnotesize\thepage},
@@ -212,7 +213,6 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \unless\ifsinglemode
 \ifprintmode\else
 \IfFileExists{./figure/cover1.pdf}{%
-    \null
     \setcounter{page}{-1}%
     \includepdf[pages=-]{./figure/cover1.pdf}%
     \thispagestyle{empty}
