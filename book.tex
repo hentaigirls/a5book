@@ -147,6 +147,9 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \vrule
     \hspace*{\stretch{1}}
     \vspace*{\stretch{1}}
+    \unless\ifonecolumnmode
+    \twocolumn
+    \fi
 }
 \newcommand{\Tocline}[2]{
     \noindent {#1}\hspace*{0.5em}\――\hspace*{0.5em}{#2}
@@ -214,6 +217,9 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \fi
 \maketitle
 \clearpage
+\unless\ifonecolumnmode
+\onecolumn
+\fi
 \IfFileExists{./work/opening/main.tex}{%
     \phantomsection
     \addcontentsline{toc}{section}{\openingtitle}
@@ -235,8 +241,11 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \twocolumn
 \fi
 \ifsinglemode
+\thispagestyle{empty}
+\hspace*{\stretch{1}}
+\clearpage
 \markboth{\booktitle}{\booktitle}
-\section*{\booktitle}
+\noindent{\large \textgt{\booktitle}}
 \begin{flushright}\bookauthor\end{flushright}
 
 %%%%% シングルモードの本文 %%%%%
