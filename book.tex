@@ -22,7 +22,7 @@
 
 \documentclass[lualatex,
 book,tate,twoside,
-paper=a5,twocolumn,
+paper=a5,
 open_bracket_pos=nibu_tentsuki,
 jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658pt
 ]{jlreq}
@@ -44,6 +44,8 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 % flag
 \newif\ifsinglemode
 %\singlemodetrue
+\newif\ifonecolumnmode
+%\onecolumnmodetrue
 
 \makeatletter
 \@ifundefined{ifprintmode}{%
@@ -103,7 +105,9 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \hspace*{\stretch{1}}
     \clearpage
     \fi
+    \unless\ifonecolumnmode
     \onecolumn
+    \fi
     \thispagestyle{empty}
     \phantomsection
     \addcontentsline{toc}{section}{#1}
@@ -117,12 +121,16 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \hspace*{1em}
     \hspace*{\stretch{1}}
     \vspace*{\stretch{1}}
+    \unless\ifonecolumnmode
     \twocolumn
+    \fi
     \clearpage
 }
 \newcommand{\sectionpause}{\vspace{\baselineskip}}
 \renewcommand\maketitle{
+    \unless\ifonecolumnmode
     \onecolumn
+    \fi
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
     \hspace*{\topmarginpt}
@@ -141,7 +149,9 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \noindent {#1}\hspace*{0.5em}\――\hspace*{0.5em}{#2}
 }
 \newcommand{\Colophon}[0]{
+    \unless\ifonecolumnmode
     \onecolumn
+    \fi
     \clearpage
     \checkoddpage
     \ifoddpage\else
@@ -216,7 +226,9 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \Tocline{表紙デザイン}{\coverauthor}
 \fi
 
+\unless\ifonecolumnmode
 \twocolumn
+\fi
 \ifsinglemode
 \section*{\booktitle}
 \begin{flushright}\bookauthor\end{flushright}
@@ -240,7 +252,9 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 
 \IfFileExists{./figure/afterwords.png}{%
     \clearpage
+    \unless\ifonecolumnmode
     \onecolumn
+    \fi
     \parbox<y>[]{1.0\textheight}{\centering \textbf{たのしい手書きあとがきコーナー}}
     \hspace*{0.25em}
     \parbox<y>[]{1.0\textheight}{\includegraphics[]{./figure/afterwords.png}}%
@@ -248,7 +262,9 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 
 \IfFileExists{./figure/form.pdf}{%
     \clearpage
+    \unless\ifonecolumnmode
     \onecolumn
+    \fi
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
     \hspace*{\stretch{1}}
