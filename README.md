@@ -44,7 +44,7 @@
 
 おおよそ1181x1181（600dpi/5cm）の画像を含んだPDFの作り方のサンプルです。
 
-```
+```sh
 qrencode "https://goo.gl/forms/XXXXXXXXXX" -o /tmp/qrcode.png
 WIDTH=$(identify /tmp/qrcode.png | cut -f3 -d" " | cut -f1 -d "x")
 mogrify -scale $(echo "(1181/$WIDTH+1)*$WIDTH" | bc) /tmp/qrcode.png
