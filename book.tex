@@ -33,7 +33,6 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \usepackage{graphicx}
 \usepackage{setspace}
 \usepackage{luatexja-ruby}
-\usepackage{fancyhdr}
 \usepackage{lltjext}
 \usepackage[mark={＊}, skip=1\zh]{sectionbreak}
 \usepackage{pdfpages}
@@ -76,14 +75,13 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \textwidth514.98866pt
 \textheight320.0pt
 \oddsidemargin-26.0pt\evensidemargin-6.0pt
-\ifsinglemode
-\fancyhead[RO]{\thepage}
-\fancyhead[LE]{\thepage}
-\fancyheadoffset{0mm}
-\renewcommand{\headrulewidth}{0pt}
-\pagestyle{fancy}
-\else
-\fi
+\NewPageStyle{main}{
+  nombre_position={top-left},
+  nombre={\footnotesize\thepage},
+  running_head_position={top-left},
+  odd_running_head_ii={\footnotesize\leftmark},
+}
+\pagestyle{main}
 \IfFontExistsTF{GenEi Koburi Mincho}{%
     \setmainfont[YokoFeatures={JFM=jlreq}, TateFeatures={JFM=jlreqv}, BoldFont=GenEi Gothic N SemiBold]{GenEi Koburi Mincho}
     \setsansfont[YokoFeatures={JFM=jlreq}, TateFeatures={JFM=jlreqv}]{GenEi Gothic N}
@@ -129,6 +127,7 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \twocolumn
     \fi
     \clearpage
+    \markboth{#1}{#1}
 }
 \newcommand{\sectionpause}{\vspace{\baselineskip}}
 \renewcommand\maketitle{
@@ -220,7 +219,9 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \addcontentsline{toc}{section}{\openingtitle}
     \input{./work/opening/main.tex}%
 }{}
+\makeatletter\let\ps@plain\ps@main\makeatother
 \tableofcontents
+\makeatletter\let\ps@plain\ps@plain\makeatother
 
 \vspace*{2em}
 \IfFileExists{./work/opening/main.tex}{%
@@ -234,6 +235,7 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \twocolumn
 \fi
 \ifsinglemode
+\markboth{\booktitle}{\booktitle}
 \section*{\booktitle}
 \begin{flushright}\bookauthor\end{flushright}
 
