@@ -144,6 +144,9 @@ jafontsize=8.8pt,baselineskip=14.965pt,head_space=16mm
 
 % (re)newcommands
 \def\――{\rule[0pt]{2\zw}{.25pt}}
+\newcommand{\sectionpause}{\vspace{\baselineskip}}
+
+\unless\ifsinglemode
 \newcommand{\Title}[2]{
     \clearpage
     \checkoddpage
@@ -174,7 +177,6 @@ jafontsize=8.8pt,baselineskip=14.965pt,head_space=16mm
     \clearpage
     \markboth{#1}{#1}
 }
-\newcommand{\sectionpause}{\vspace{\baselineskip}}
 \renewcommand\maketitle{
     \unless\ifonecolumnmode
     \onecolumn
@@ -261,6 +263,7 @@ jafontsize=8.8pt,baselineskip=14.965pt,head_space=16mm
 \def\contentsline#1#2#3#4{\csname l@#1\endcsname{\hyper@linkstart{link}{#4}{#2}\hyper@linkend}{\rensuji{#3}}}
 \renewcommand{\@dotsep}{10000}
 \makeatother
+\fi
 
 \jlreqsetup{
     reference_mark=interlinear
@@ -302,11 +305,24 @@ jafontsize=8.8pt,baselineskip=14.965pt,head_space=16mm
 \noindent{\large \textgt{\booktitle}}
 \begin{flushright}\bookauthor\end{flushright}
 
-%%%%% シングルモードの本文 %%%%%
+\IfFileExists{./work.tex}{\input{./work.tex}}{%
+    \unless\ifonecolumnmode%
+    \onecolumn%
+    \fi%
+    \parbox<y>[c]{\yokoboxwidth}{%
+        Please run:\\\texttt{echo '或曇った冬の日暮である。私は横須賀発上り二等客車の隅に腰を下して、ぼんやり発車の笛を待っていた。' > ./work.tex}%
+    }%
+    \unless\ifonecolumnmode%
+    \twocolumn%
+    \fi%
+}
 
 \begin{flushright}おわり\end{flushright}
 \vspace*{\stretch{1}}
-% \small{\textbf{\booktitle}の全文は\textbf{\bookauthor}によって\textbf{CC BY 4.0}でライセンスされており、ライセンスの条件に従っている限り自由に利用できます。}
+{\small \license%
+\ifdefined\licenseurl%
+\\ライセンスの詳細は以下のURLで確認できます。\\\texttt{\licenseurl}%
+\fi}
 \else
 \IfFileExists{./works.txt}{\input{./works.txt}}{%
     \IfFileExists{./work/input.tex}{\input{./work/input.tex}}{%
@@ -319,6 +335,7 @@ jafontsize=8.8pt,baselineskip=14.965pt,head_space=16mm
 }
 \fi
 
+\unless\ifsinglemode
 \IfFileExists{./figure/afterwords.png}{%
     \clearpage
     \unless\ifonecolumnmode
@@ -328,7 +345,6 @@ jafontsize=8.8pt,baselineskip=14.965pt,head_space=16mm
     \hspace*{0.25em}
     \parbox<y>[]{1.0\textheight}{\includegraphics[]{./figure/afterwords.png}}%
 }{}
-
 \IfFileExists{./figure/form.pdf}{%
     \clearpage
     \unless\ifonecolumnmode
@@ -352,7 +368,6 @@ jafontsize=8.8pt,baselineskip=14.965pt,head_space=16mm
     \vspace*{\stretch{1}}
 }{}
 
-\unless\ifsinglemode
 \Colophon
 \ifprintmode\else
 \IfFileExists{./figure/cover4.pdf}{%
