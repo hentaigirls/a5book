@@ -1,6 +1,6 @@
-# a5book
+# abook
 
-![GitHub Action status](https://github.com/hentaigirls/a5book/workflows/build%20a5book%20template/badge.svg)
+![GitHub Action status](https://github.com/hentaigirls/abook/workflows/build%20a5book%20template/badge.svg)
 
 ## 使い方
 
