@@ -174,13 +174,13 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
     \hspace*{\stretch{1}}
-    \parbox<y>[c]{\yokoboxwidth}{\small{\license%
+    \parbox<y>[c]{\yokoboxwidth}{\small \license%
     \ifdefined\licenseurl%
         \\ライセンスの詳細は以下のURLで確認できます。\\\texttt{\licenseurl}%
-    \fi}}
+    \fi}
     \ifdefined\downloadurl%
         \hspace*{0.25em}
-        \parbox<y>[c]{\yokoboxwidth}{\small{以下のURLから最新のPDF版をダウンロードできます。\\\texttt{\downloadurl}}}
+        \parbox<y>[c]{\yokoboxwidth}{\small 以下のURLから最新のPDF版をダウンロードできます。\\\texttt{\downloadurl}}
     \fi
     \vspace*{\stretch{1}}
     \clearpage
@@ -279,8 +279,9 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \thispagestyle{empty}
     \vspace*{\stretch{1}}
     \hspace*{\stretch{1}}
-    \parbox<y>[c]{\yokoboxwidth}{\centering \small{ここから「\booktitle」の感想をお聞かせください！}}
-    \parbox<y>[c]{\yokoboxwidth}{\centering \includegraphics[width=5cm]{./figure/form.pdf}} \parbox<y>[c]{\yokoboxwidth}{\centering または、\texttt{\questionnaireurl}}%
+    \parbox<y>[c]{\yokoboxwidth}{\centering \small ここから「\booktitle」の感想をお聞かせください！}
+    \parbox<y>[c]{\yokoboxwidth}{\centering \includegraphics[width=5cm]{./figure/form.pdf}}
+    \parbox<y>[c]{\yokoboxwidth}{\centering \small または、\texttt{\questionnaireurl}}
     \hspace*{\stretch{1}}
     \vspace*{\stretch{1}}
 }{}
