@@ -225,20 +225,11 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \unless\ifonecolumnmode
 \onecolumn
 \fi
-\IfFileExists{./work/opening/main.tex}{%
-    \phantomsection
-    \addcontentsline{toc}{section}{\openingtitle}
-    \input{./work/opening/main.tex}%
-}{}
 \makeatletter\let\ps@plain\ps@main\makeatother
 \tableofcontents
 \makeatletter\let\ps@plain\ps@plain\makeatother
 
 \vspace*{2em}
-\IfFileExists{./work/opening/main.tex}{%
-    \Tocline{\openingtitle}{\openingauthor}
-}{}
-
 \Tocline{表紙デザイン}{\coverauthor}
 \fi
 

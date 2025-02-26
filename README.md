@@ -21,17 +21,6 @@
 1. `./work/input.tex` に `\input{./work/<author>/<title>/main.tex}` を追加するか、 `./script/make_story_list.sh` を実行します。なお、 `./work/input.tex` はgitで管理されていません。
 1. `llmk book.tex` を実行するか、push後にCIの結果を確認します。
 
-### 解説ページを追加する人
-
-（解説ページは廃止されました）
-
-### 冒頭ページを追加する人
-
-1. `./work/example-opening/` を `./work/opening/` にコピーします。
-1. `./work/opening/main.tex` を編集します。
-1. `./work/opening/LICENSE` に適切なライセンス表示を追加します。
-1. `llmk book.tex` を実行するか、push後にCIの結果を確認します。
-
 ### 表紙を追加する人
 
 1. `./figure/cover1.pdf` に表1を追加します。

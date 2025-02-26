@@ -2,8 +2,6 @@
 \newcommand{\bookauthor}{AUTHOR}
 \newcommand{\coverauthor}{COVER AUTHOR}
 \newcommand{\xmpauthors}{XMP \sep AUTHOR \sep LIST}
-\newcommand{\openingtitle}{OPENING TITLE}
-\newcommand{\openingauthor}{OPENING AUTHOR}
 \newcommand{\contact}{CONTACT}
 \newcommand{\group}{CIRCLE NAME}
 \newcommand{\publisher}{PUBLISHER}
