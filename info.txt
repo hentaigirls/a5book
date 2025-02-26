@@ -1,3 +1,28 @@
+%%%%% flags
+
+%%% page size
+%% afivebook: A5版で出力する（デフォルト）
+%% asixbook: 文庫版で出力する
+
+%\afivebooktrue
+%\asixbooktrue
+
+%%% page style
+%% onecolumnmode: A5版1段組で出力する（文庫版では常に1段組）
+%% secondlevelsectionmode: TocSectionとTitleの2階層でもくじを作る
+%% singlemode: 表紙と目次を出力しない
+
+%\onecolumnmodetrue
+%\secondlevelsectionmodetrue
+%\singlemodetrue
+
+%%% output mode
+%% printmode: 印刷に適した形式で出力する
+
+%\printmodetrue
+
+%%%%% book metadata (required)
+
 \newcommand{\booktitle}{TITLE}
 \newcommand{\bookauthor}{AUTHOR}
 \newcommand{\coverauthor}{COVER AUTHOR}
@@ -7,7 +32,8 @@
 \newcommand{\publisher}{PUBLISHER}
 \newcommand{\publishdate}{PUBLISH DATE}
 \newcommand{\publishisodate}{1970-01-01}
-\renewcommand{\contentsname}{もくじ}
+
+%%%%% book metadata (optional)
 
 % \newcommand{\bookdescription}{DESCRIPTION}
 % \newcommand{\bookkeywords}{BOOK \sep KEYWORD \sep LIST}

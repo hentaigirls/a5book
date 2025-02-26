@@ -20,12 +20,48 @@
   \Date{\publishisodate}
 \end{filecontents*}
 
+% flags and infomation
+\makeatletter
+\newif\ifsinglemode
+\newif\ifonecolumnmode
+\newif\ifsecondlevelsectionmode
+\@ifundefined{ifprintmode}{%
+  \newif\ifprintmode
+}{}
+\@ifundefined{ifafivebook}{%
+  \newif\ifafivebook
+}{}
+\@ifundefined{ifasixbook}{%
+  \newif\ifasixbook
+}{}
+\makeatother
+\newcommand{\license}{表紙イラストを含む全ての作品は作者が権利を留保しており、法律で認められている範囲を超えた利用を禁じます。}
+\input{info.txt}
+\ifafivebook
+\asixbookfalse
+\else\ifasixbook
+\onecolumnmodetrue
+\afivebookfalse
+\else
+\afivebooktrue
+\fi
+\fi
+
+\ifafivebook
 \documentclass[lualatex,
 book,tate,twoside,
 paper=a5,
 open_bracket_pos=nibu_tentsuki,
 jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658pt
 ]{jlreq}
+\else
+\documentclass[lualatex,
+book,tate,twoside,
+paper={105mm,148mm},
+open_bracket_pos=nibu_tentsuki,
+jafontsize=8.8pt,baselineskip=14.965pt,head_space=16mm
+]{jlreq}
+\fi
 % packages
 \usepackage{luatexja}
 \usepackage{luatexja-fontspec}
@@ -34,29 +70,19 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \usepackage{setspace}
 \usepackage{luatexja-ruby}
 \usepackage{lltjext}
+\ifafivebook
 \usepackage[mark={＊}, skip=1\zh]{sectionbreak}
+\else
+\usepackage[mark={＊}, skip=0.84\zh]{sectionbreak}
+\fi
 \usepackage{pdfpages}
 \usepackage{amsfonts}
 \usepackage[pdfdirection=R2L]{hyperref}
 \usepackage{titlesec}
 \usepackage{tocloft}
 
-% flag
-\newif\ifsinglemode
-%\singlemodetrue
-\newif\ifonecolumnmode
-%\onecolumnmodetrue
-
-\makeatletter
-\@ifundefined{ifprintmode}{%
-  \newif\ifprintmode
-  %\printmodetrue
-}{}
-\makeatother
-
 % documentinfomation
-\newcommand{\license}{表紙イラストを含む全ての作品は作者が権利を留保しており、法律で認められている範囲を超えた無断複製・無断転載を禁じます。}
-\input{info.txt}
+\renewcommand{\contentsname}{もくじ}
 \title{\booktitle}
 \author{\bookauthor}
 \date{\publishdate}
@@ -69,6 +95,7 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \fi
 
 % config
+\ifafivebook
 \newcommand{\topmarginpt}[0]{-50.1266pt} % -head_space
 \newcommand{\yokoboxwidth}[0]{257.49433pt} % 奥付やライセンス表示などの幅
 \newcommand{\booktitleboxwidth}[0]{257.49433pt} % 書名タイトル表示の幅
@@ -83,6 +110,22 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
   running_head_position={top-left},
   odd_running_head_ii={\footnotesize\leftmark},
 }
+\else
+\newcommand{\topmarginpt}[0]{-16mm} % -head_space
+\newcommand{\yokoboxwidth}[0]{80mm} % 奥付やライセンス表示などの幅
+\newcommand{\booktitleboxwidth}[0]{50mm} % 書名タイトル表示の幅
+\newcommand{\titleboxwidth}[0]{80mm} % 作品タイトルの幅
+\textwidth122mm % 本文紙面の高さ
+\textheight82mm % 本文紙面の幅
+\oddsidemargin-15.4mm % 左ページの左余白（1inchからマイナスした値）
+\evensidemargin-10mm % 右ページの右余白（0からマイナスした値）
+\NewPageStyle{main}{
+  nombre_position={top-left},
+  nombre={\scriptsize\thepage},
+  running_head_position={top-left},
+  odd_running_head_ii={\scriptsize\leftmark},
+}
+\fi
 \pagestyle{main}
 \IfFontExistsTF{GenEi Koburi Mincho}{%
     \setmainfont[YokoFeatures={JFM=jlreq}, TateFeatures={JFM=jlreqv}, BoldFont=GenEi Gothic N SemiBold]{GenEi Koburi Mincho}
@@ -114,7 +157,7 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \fi
     \thispagestyle{empty}
     \phantomsection
-    \addcontentsline{toc}{section}{#1}
+    \addcontentsline{toc}{subsection}{#1}
     \vspace*{\stretch{1}}
     \hspace*{\topmarginpt}
     \hspace*{\stretch{1}}
@@ -156,10 +199,25 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
 \newcommand{\Tocline}[2]{
     \noindent {#1}\hspace*{0.5em}\――\hspace*{0.5em}{#2}
 }
-\setlength{\cftbeforetoctitleskip}{0mm}
+\ifsecondlevelsectionmode
+\setlength{\cftbeforesecskip}{10mm}
+\setlength{\cftbeforesubsecskip}{2mm}
 \setlength{\cftaftertoctitleskip}{0mm}
+\newcommand{\TocSection}[1]{
+    \addtocontents{toc}{\cftpagenumbersoff{section}}
+    \phantomsection
+    \addcontentsline{toc}{section}{\Large #1}
+}
+\else
+\setlength{\cftbeforesecskip}{0mm}
+\setlength{\cftbeforesubsecskip}{0mm}
+\setlength{\cftaftertoctitleskip}{10mm}
+\fi
+\setlength{\cftbeforetoctitleskip}{0mm}
 \renewcommand{\cfttoctitlefont}{\huge\mcfamily}
+\renewcommand{\cftsecfont}{\gtfamily}
 \renewcommand{\cftdot}{}
+\renewcommand{\cftsubsecpagefont}{\scriptsize}
 \newcommand{\Colophon}[0]{
     \unless\ifonecolumnmode
     \onecolumn
@@ -280,7 +338,15 @@ jafontsize=9.62216pt,baselineskip=17pt,head_space=50.1266pt,column_gap=28.86658p
     \vspace*{\stretch{1}}
     \hspace*{\stretch{1}}
     \parbox<y>[c]{\yokoboxwidth}{\centering \small ここから「\booktitle」の感想をお聞かせください！}
+    \ifafivebook
+    \hspace*{5mm}
     \parbox<y>[c]{\yokoboxwidth}{\centering \includegraphics[width=5cm]{./figure/form.pdf}}
+    \hspace*{5mm}
+    \else
+    \hspace*{3.5mm}
+    \parbox<y>[c]{\yokoboxwidth}{\centering \includegraphics[width=3.5cm]{./figure/form.pdf}}
+    \hspace*{3.5mm}
+    \fi
     \parbox<y>[c]{\yokoboxwidth}{\centering \small または、\texttt{\questionnaireurl}}
     \hspace*{\stretch{1}}
     \vspace*{\stretch{1}}
