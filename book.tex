@@ -326,11 +326,15 @@ jafontsize=8.8pt,baselineskip=14.965pt,head_space=16mm
 \else
 \IfFileExists{./works.txt}{\input{./works.txt}}{%
     \IfFileExists{./work/input.tex}{\input{./work/input.tex}}{%
+        \unless\ifonecolumnmode%
         \onecolumn%
+        \fi%
         \parbox<y>[c]{\yokoboxwidth}{%
             Please run:\\\texttt{echo '{\textbackslash}input\{work/<author>/<title>/main.tex\}' > ./work/input.tex}%
         }%
+        \unless\ifonecolumnmode%
         \twocolumn%
+        \fi%
     }%
 }
 \fi

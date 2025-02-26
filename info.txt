@@ -35,9 +35,9 @@
 
 %%%%% book metadata (optional)
 
-% \newcommand{\bookdescription}{DESCRIPTION}
-% \newcommand{\bookkeywords}{BOOK \sep KEYWORD \sep LIST}
-% \renewcommand{\license}{表紙イラストを含む全ての作品はCC BY 4.0でライセンスされており、ライセンスの条件に従っている限り自由に利用できます。}
-% \newcommand{\licenseurl}{https://creativecommons.org/licenses/by/4.0/}
-% \newcommand{\downloadurl}{DOWNLOAD URL}
-% \newcommand{\questionnaireurl}{QUESTIONNAIRE URL}
+%\newcommand{\bookdescription}{DESCRIPTION}
+%\newcommand{\bookkeywords}{BOOK \sep KEYWORD \sep LIST}
+%\renewcommand{\license}{表紙イラストを含む全ての作品はCC BY 4.0でライセンスされており、ライセンスの条件に従っている限り自由に利用できます。}
+%\newcommand{\licenseurl}{https://creativecommons.org/licenses/by/4.0/}
+%\newcommand{\downloadurl}{DOWNLOAD URL}
+%\newcommand{\questionnaireurl}{QUESTIONNAIRE URL}
